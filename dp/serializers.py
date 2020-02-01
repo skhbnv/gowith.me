@@ -41,6 +41,14 @@ class CommentsDetailSerializer(serializers.ModelSerializer):
 
 
 class EventListSerializer(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='category_name'
+     )
+    location = LocationDetailSerializer(many=False, read_only=True)
+    images = ImagesDetailSerializer(many=False, read_only=True)
+
     class Meta:
         model = Events
         fields = ['id', 'date', 'price', 'title', 'category', 'description', 'location', 'images']
