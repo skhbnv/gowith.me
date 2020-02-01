@@ -8,7 +8,9 @@ urlpatterns = [
     path('categories/create/', CategoriesCreateView.as_view()),
     path('users/create/', UsersCreateView.as_view()),
     path('images/create/', ImagesCreateView.as_view()),
-    # path('comments /create/', CommentsCreateView.as_view()),
+    path('comments/create/', CommentsCreateView.as_view()),
+    path('user/create/', CommentsCreateView.as_view()),
+
     path('list/events/', EventsListView.as_view()),
     path('event/detail/<int:pk>/', EventDetailView.as_view())
 ]

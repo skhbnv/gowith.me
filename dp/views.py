@@ -27,6 +27,10 @@ class CommentsCreateView(generics.CreateAPIView):
     serializer_class = CommentsDetailSerializer
 
 
+class UsersCreateView(generics.CreateAPIView):
+    serializer_class = UsersDetailSerializer
+
+
 class EventsListView(generics.ListAPIView):
     serializer_class = EventListSerializer
     queryset = Events.objects.all()

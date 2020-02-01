@@ -27,6 +27,14 @@ class Images(models.Model):
     carousel_url5 = models.CharField(verbose_name='poster_ur5', null=True, max_length=150)
 
 
+class Comments(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='id', db_index=True, unique=True)
+    parent_comment = models.ForeignKey('dp.Comments', verbose_name='parent_comment', null=True, max_length=150, on_delete=models.CASCADE)
+    date = models.DateTimeField(null=True, verbose_name='date')
+    message = models.CharField(verbose_name='message', max_length=120)
+    user_id = models.ForeignKey(Users, verbose_name="user_id", on_delete=models.CASCADE)
+
+
 class Events(models.Model):
     id = models.AutoField(primary_key=True, verbose_name='id', db_index=True, unique=True)
     date = models.DateTimeField(null=True, verbose_name='date')
@@ -36,4 +44,6 @@ class Events(models.Model):
     description = models.CharField(verbose_name='description', null=True, max_length=550)
     location = models.ForeignKey(Locations, max_length=150, null=True, verbose_name='location', on_delete=models.CASCADE)
     images = models.ForeignKey(Images, max_length=150, null=True, verbose_name='images', on_delete=models.CASCADE)
+    comments = models.ManyToManyField(Comments, verbose_name="comments")
+
 

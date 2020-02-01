@@ -5,7 +5,7 @@ from dp.models import *
 class EventDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
-        fields = ['date', 'price', 'title', 'category', 'description', 'location', 'images']
+        fields = ['date', 'price', 'title', 'category', 'description', 'location', 'images', 'comments']
 
 
 class LocationDetailSerializer(serializers.ModelSerializer):
@@ -36,8 +36,8 @@ class ImagesDetailSerializer(serializers.ModelSerializer):
 
 class CommentsDetailSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Events
-        fields = '__all__'
+        model = Comments
+        fields = ['parent_comment', 'date', 'message', 'user_id']
 
 
 class EventListSerializer(serializers.ModelSerializer):
@@ -48,7 +48,8 @@ class EventListSerializer(serializers.ModelSerializer):
      )
     location = LocationDetailSerializer(many=False, read_only=True)
     images = ImagesDetailSerializer(many=False, read_only=True)
+    comments = CommentsDetailSerializer(many=True, read_only=True)
 
     class Meta:
         model = Events
-        fields = ['id', 'date', 'price', 'title', 'category', 'description', 'location', 'images']
+        fields = ['id', 'date', 'price', 'title', 'category', 'description', 'location', 'images', 'comments']
